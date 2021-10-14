@@ -53,7 +53,7 @@ def get_data(url: str):
     soup = BeautifulSoup(wiki_page.content, 'html.parser')
 
     table = soup.find('table', class_=class_name)
-    headers = [header.text.strip() for header in table.find_all('th')]
+    headers = [header.find(text=True).strip() for header in table.find_all('th')]
     results = [{ headers[i]: cell.text.strip() for i, cell in enumerate(row.find_all('td')) } for row in table.find_all('tr')]
 
     if len(results) > 0:
